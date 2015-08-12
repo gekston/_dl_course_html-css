@@ -98,8 +98,38 @@ var stars =
     "<span id='mark1'> Кількість голосів:</span>"+
     "</div>"
 
+// load css js
+function loadjscssfile(filename, filetype){
+    if (filetype=="js"){ //if filename is a external JavaScript file
+        var fileref=document.createElement('script')
+        fileref.setAttribute("type","text/javascript")
+        fileref.setAttribute("src", filename)
+    }
+    else if (filetype=="css"){ //if filename is an external CSS file
+        var fileref=document.createElement("link")
+        fileref.setAttribute("rel", "stylesheet")
+        fileref.setAttribute("type", "text/css")
+        fileref.setAttribute("href", filename)
+    }
+    if (typeof fileref!="undefined")
+        document.getElementsByTagName("head")[0].appendChild(fileref)
+}
 
- 
+loadjscssfile("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js", "js") //dynamically load materialize.min.js
+loadjscssfile("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css", "css") ////dynamically load materialize.min.css
+//loadjscssfile("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", "css") ////dynamically load bootstrap.min.css
+loadjscssfile("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css", "css") ////dynamically load font-awesome.min.css
+
+// onload add div with list course
+window.onload=function() {
+    var d = document.createElement('div');
+    var i = document.createElement('div');
+    d.className='slideout';
+    document.body.appendChild(d);
+    i.className='slideout_inner';
+    document.body.appendChild(i);
+}
+
 /**
  * Запуск дополнительных элементов при загрузке окна
  */
