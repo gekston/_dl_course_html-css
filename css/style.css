@@ -197,7 +197,13 @@ table.bord {
     font-size: 18pt;
     text-align: center;
 }
-ul.toc li { list-style: none }
+ul.toc li {
+    list-style: none;
+    color: black !important;
+}
+ul.toc li a{
+    color: black !important;
+}
 ul.toc { padding-left: 1em }
 .keywords {
     padding-left: 5em;
@@ -222,7 +228,6 @@ ul.toc { padding-left: 1em }
 .mainContent.cke_editable {
     width: 90%;
 }
-
 .mainContent p	{ text-indent: 20px }
 .mainContent table p  { text-indent: 0 }
 .mainContent h2,
@@ -230,6 +235,61 @@ ul.toc { padding-left: 1em }
 .mainContent h4 {
     font-size: 2.3rem !important;
     text-align:center;
+}
+/*table:nth-child(5) tr td img {
+    border: 1px solid red !important;
+    display: none;
+}*/
+table:nth-child(5) tr td {
+    text-align: center !important;
+}
+table:nth-child(5) tr td:nth-child(1) a {
+    display: block;
+}
+table:nth-child(5) tr td:nth-child(3) a {
+    display: block;
+}
+table:nth-child(5) tr td:nth-child(1) img {
+    display: none;
+}
+table:nth-child(5) tr td:nth-child(3) img {
+    display: none;
+}
+.footer tr:nth-child(1) td:nth-child(1) img {
+    display: none;
+}
+.footer tr:nth-child(1) td:nth-child(2) img {
+    display: none;
+}
+.footer tr:nth-child(1) td:nth-child(3) img {
+    display: none;
+}
+.footer tr:nth-child(2) td:nth-child(2) img {
+    display: none;
+}
+table:nth-child(5) a {
+    color: #d6d6d6;
+}
+table:nth-child(5) a:hover {
+    color: #337AB7;
+    -webkit-transition: all .25s linear;
+    -moz-transition: all .25s linear;
+    -o-transition: all .25s linear;
+    transition: all .25s linear;
+}
+.footer a {
+    color: #D6D6D6;
+    -webkit-transition: all .25s linear;
+    -moz-transition: all .25s linear;
+    -o-transition: all .25s linear;
+    transition: all .25s linear;
+}
+.footer a:hover {
+    color: #337AB7;
+    -webkit-transition: all .25s linear;
+    -moz-transition: all .25s linear;
+    -o-transition: all .25s linear;
+    transition: all .25s linear;
 }
 #fixme {
 	position: fixed;
@@ -305,15 +365,6 @@ ul.toc { padding-left: 1em }
     width: 100%;
     font-size: 14px;
     margin: 0 auto;
-}
-td {
-    text-align: center !important;
-}
-td:first-child {
-    text-align: left;
-}
-td:last-child {
-    text-align: right;
 }
 .footer td, th {
     text-align: center !important;
