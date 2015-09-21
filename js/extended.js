@@ -99,7 +99,28 @@ var stars =
     "<span id='mark1'> Кількість голосів:</span>"+
     "</div>"
 
-//
+// load css js
+function loadjscssfile(filename, filetype){
+    if (filetype=="js"){ //if filename is a external JavaScript file
+        var fileref=document.createElement('script')
+        fileref.setAttribute("type","text/javascript")
+        fileref.setAttribute("src", filename)
+    }
+    else if (filetype=="css"){ //if filename is an external CSS file
+        var fileref=document.createElement("link")
+        fileref.setAttribute("rel", "stylesheet")
+        fileref.setAttribute("type", "text/css")
+        fileref.setAttribute("href", filename)
+    }
+    if (typeof fileref!="undefined")
+        document.getElementsByTagName("head")[0].appendChild(fileref)
+}
+
+loadjscssfile("https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js", "js") ////dynamically load jquery.min.js
+loadjscssfile("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js", "js") //dynamically load materialize.min.js
+loadjscssfile("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css", "css") ////dynamically load materialize.min.css
+//loadjscssfile("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", "css") ////dynamically load bootstrap.min.css
+loadjscssfile("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css", "css") ////dynamically load font-awesome.min.css
 
 // onload add div with list course
 window.onload=function() {
@@ -109,7 +130,7 @@ window.onload=function() {
     document.body.appendChild(d);
     i.className='slideout_inner';
     document.body.appendChild(i);
-/* create btn left rigt top list */
+/* create btn left rigt*/
     document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
     document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
     //document.getElementsByClassName("footer");
