@@ -131,6 +131,9 @@ window.onload=function() {
     i.className='slideout_inner';
     document.body.appendChild(i);
 /* create btn left rigt*/
+    /*if(document.querySelector('table:nth-child(5) tr td:nth-child(1) a') != null){
+    var idPost=document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
+}*/
     document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
     document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
     //document.getElementsByClassName("footer");
@@ -138,6 +141,10 @@ window.onload=function() {
     document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
     document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
     document.querySelector('.footer tr:nth-child(2) td:nth-child(2) a').innerHTML += '<i class="fa fa-list-alt fa-2x"> </i>';
+    //add icon from block quote
+    document.querySelector('.warning').innerHTML += '<i class="fa fa-exclamation-triangle fa-2x"> </i>';
+    document.querySelector('.notice').innerHTML += '<i class="fa fa-commenting-o fa-2x"> </i>';
+    document.querySelector('.quote').innerHTML += '<i class="fa fa-search fa-2x"> </i>';
 }
 
 
