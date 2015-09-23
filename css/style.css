@@ -196,6 +196,8 @@ table.bord {
     margin: 0px;
     font-size: 18pt;
     text-align: center;
+    color: white;
+    font-weight: bold;
 }
 ul.toc li {
     list-style: none;
@@ -218,6 +220,7 @@ ul.toc { padding-left: 1em }
 }
 .toc .tocItem:hover {
     color: #337AB7 !important;
+    font-weight: bold;
     -webkit-transition: all .25s linear;
     -moz-transition: all .25s linear;
     -o-transition: all .25s linear;
