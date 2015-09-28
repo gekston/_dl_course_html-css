@@ -99,8 +99,29 @@ var stars =
     "<span id='mark1'> Кількість голосів:</span>"+
     "</div>"
 
+
 // load css js
-function loadjscssfile(filename, filetype){
+
+
+// onload add div with list course
+window.onload=function() {
+    document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
+    document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
+    document.querySelector('body').innerHTML += '<div class="slideout"></div>';
+    document.querySelector('.slideout').innerHTML += '<i class="fa fa-bars fa-2x"> </i>';
+    document.querySelector('.slideout').innerHTML += '<div class="slideout_inner"></div>';
+    document.querySelector('.footer tr:nth-child(1) td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
+    document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
+    document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
+    document.querySelector('.footer tr:nth-child(2) td:nth-child(2) a').innerHTML += '<i class="fa fa-list-alt fa-2x"> </i>';
+    /* in future fix btn in alert message
+    document.querySelector('.warning').innerHTML += '<i class="fa fa-exclamation-triangle fa-2x"> </i>';
+    document.querySelector('.notice').innerHTML += '<i class="fa fa-commenting-o fa-2x"> </i>';
+    document.querySelector('.quote').innerHTML += '<i class="fa fa-search fa-2x"> </i>';
+    */
+    
+    
+    function loadjscssfile(filename, filetype){
     if (filetype=="js"){ //if filename is a external JavaScript file
         var fileref=document.createElement('script')
         fileref.setAttribute("type","text/javascript")
@@ -116,37 +137,19 @@ function loadjscssfile(filename, filetype){
         document.getElementsByTagName("head")[0].appendChild(fileref)
 }
 
+loadjscssfile("../css/font-awesome.css", "css") ////dynamically load font-awesome.min.css
 loadjscssfile("https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js", "js") ////dynamically load jquery.min.js
-loadjscssfile("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js", "js") //dynamically load materialize.min.js
-loadjscssfile("https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css", "css") ////dynamically load materialize.min.css
-//loadjscssfile("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css", "css") ////dynamically load bootstrap.min.css
-loadjscssfile("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css", "css") ////dynamically load font-awesome.min.css
-
-// onload add div with list course
-window.onload=function() {
-    var d = document.createElement('div');
-    var i = document.createElement('div');
-    d.className='slideout';
-    document.body.appendChild(d);
-    i.className='slideout_inner';
-    document.body.appendChild(i);
-/* create btn left rigt*/
-    /*if(document.querySelector('table:nth-child(5) tr td:nth-child(1) a') != null){
-    var idPost=document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
-}*/
-    document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
-    document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
-    //document.getElementsByClassName("footer");
-    document.querySelector('.footer tr:nth-child(1) td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
-    document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
-    document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
-    document.querySelector('.footer tr:nth-child(2) td:nth-child(2) a').innerHTML += '<i class="fa fa-list-alt fa-2x"> </i>';
-    //add icon from block quote
-    document.querySelector('.warning').innerHTML += '<i class="fa fa-exclamation-triangle fa-2x"> </i>';
-    document.querySelector('.notice').innerHTML += '<i class="fa fa-commenting-o fa-2x"> </i>';
-    document.querySelector('.quote').innerHTML += '<i class="fa fa-search fa-2x"> </i>';
+loadjscssfile("../css/materialize.min.css", "css") ////dynamically load materialize.min.css
+//loadjscssfile("materialize.min.js", "js") //dynamically load materialize.min.js if need uncomment and use
+        
+    if (window.jQuery) {
+        console.log("jQuery load");
+    }
+    else {
+        console.log("load jQuery faild");
+    }
 }
-
+//jQuery (".slideout_inner").load("../index.html")
 
 
 /**
