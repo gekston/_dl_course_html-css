@@ -1,6 +1,11 @@
 var CKEDITOR_BASEPATH = "/javascripts/ckeditor/";
 var mainContent = null;
 
+var script = document.createElement('script');
+script.src = '../js/2.1.3jquery.min.js';
+document.getElementsByTagName('head')[0].appendChild(script);
+console.log('script loaded');
+
 function startAnnotator() {
   var m  = window.location.href.match(/textbooks\/\d+\/(\d+)/);
   if(!m) return;
@@ -99,28 +104,7 @@ var stars =
     "<span id='mark1'> Кількість голосів:</span>"+
     "</div>"
 
-
 // load css js
-
-
-// onload add div with list course
-window.onload=function() {
-    document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
-    document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
-    document.querySelector('body').innerHTML += '<div class="slideout"></div>';
-    document.querySelector('.slideout').innerHTML += '<i class="fa fa-bars fa-2x"> </i>';
-    document.querySelector('.slideout').innerHTML += '<div class="slideout_inner"></div>';
-    document.querySelector('.footer tr:nth-child(1) td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
-    document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
-    document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
-    document.querySelector('.footer tr:nth-child(2) td:nth-child(2) a').innerHTML += '<i class="fa fa-list-alt fa-2x"> </i>';
-    /* in future fix btn in alert message
-    document.querySelector('.warning').innerHTML += '<i class="fa fa-exclamation-triangle fa-2x"> </i>';
-    document.querySelector('.notice').innerHTML += '<i class="fa fa-commenting-o fa-2x"> </i>';
-    document.querySelector('.quote').innerHTML += '<i class="fa fa-search fa-2x"> </i>';
-    */
-    
-    
     function loadjscssfile(filename, filetype){
     if (filetype=="js"){ //if filename is a external JavaScript file
         var fileref=document.createElement('script')
@@ -136,21 +120,64 @@ window.onload=function() {
     if (typeof fileref!="undefined")
         document.getElementsByTagName("head")[0].appendChild(fileref)
 }
-
 loadjscssfile("../css/font-awesome.css", "css") ////dynamically load font-awesome.min.css
-loadjscssfile("https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js", "js") ////dynamically load jquery.min.js
 loadjscssfile("../css/materialize.min.css", "css") ////dynamically load materialize.min.css
 //loadjscssfile("materialize.min.js", "js") //dynamically load materialize.min.js if need uncomment and use
-        
-    if (window.jQuery) {
-        console.log("jQuery load");
-    }
-    else {
-        console.log("load jQuery faild");
-    }
-}
-//jQuery (".slideout_inner").load("../index.html")
 
+// onload add div with list course
+window.onload=function() {
+    document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
+    document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
+    /*
+	document.querySelector('body').innerHTML += '<div class="slideout"></div>';
+    document.querySelector('.slideout').innerHTML += '<i class="fa fa-bars fa-2x"> </i>';
+    document.querySelector('.slideout').innerHTML += '<div class="slideout_inner"></div>';
+	*/
+	document.querySelector('.mainContent').innerHTML += '<div id="toTop"><i class="fa fa-arrow-circle-up fa-4x"> </i></div>';
+    document.querySelector('.footer tr:nth-child(1) td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
+    document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
+    document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
+    document.querySelector('.footer tr:nth-child(2) td:nth-child(2) a').innerHTML += '<i class="fa fa-list-alt fa-2x"> </i>';
+    /* in future fix btn in alert message
+    document.querySelector('.warning').innerHTML += '<i class="fa fa-exclamation-triangle fa-2x"> </i>';
+    document.querySelector('.notice').innerHTML += '<i class="fa fa-commenting-o fa-2x"> </i>';
+    document.querySelector('.quote').innerHTML += '<i class="fa fa-search fa-2x"> </i>';
+    */ 
+
+	/*
+	calculate height html page
+	var h=document.body.clientHeight;
+	var c = h/3508;
+	console.log(h);
+	console.log(c);
+	*/
+}
+setTimeout(function () {
+	$(function() {
+        $(window).scroll(function() {
+            if($(this).scrollTop() != 0) {
+                $('#toTop').fadeIn();
+            } else {
+                $('#toTop').fadeOut();
+            }
+        });
+        $('#toTop').click(function() {
+            $('body,html').animate({scrollTop:0},800);
+        });
+    });
+}, 10000);
+
+//Try parse XML
+/*  
+var xml = "../INDEX/toc.xml",
+  xmlDoc = $.parseXML( xml ),
+  $xml = $( xmlDoc ),
+  $title = $xml.find( "title" );
+*/
+/*jQuery(".slideout_inner").hover(
+    function() {
+        jQuery(".slideout_inner").load("../index.html .section");
+    })*/
 
 /**
  * Запуск дополнительных элементов при загрузке окна
