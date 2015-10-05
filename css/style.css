@@ -315,12 +315,12 @@ table:nth-child(5) a i {
 table:nth-child(5) tr td:nth-child(1) a {
     display: block;
 	position: fixed;
-    margin-top: 30%;
+    margin-top: 25vh;
 }
 table:nth-child(5) tr td:nth-child(3) a {
     display: block;
 	position: fixed;
-    margin-top: 30%;
+    margin-top: 25vh;
 }
 table:nth-child(5) tr td:nth-child(1) img {
     display: none;
