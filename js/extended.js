@@ -173,6 +173,12 @@ setTimeout(function () {
 			return false;
 		});
 	})(jQuery);
+	(function(){
+		$('.keywords').on('click', 'a', function () {
+			$('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 );
+			return false;
+		});
+	})(jQuery);
 	/*$.ajax({
 		type: "GET",
 		url: "../INDEX/toc.xml",
