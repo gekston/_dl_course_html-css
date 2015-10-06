@@ -127,8 +127,12 @@ loadjscssfile("../css/materialize.min.css", "css") ////dynamically load material
 
 // onload add div with list course
 window.onload=function() {
-    document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
-    document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
+	//document.querySelector("a ~ h2").innerHTML += ' <hr/>';
+	
+	//var a = $("h2 ~ a").html('</div><div class=class="mainContent">');
+	//console.log(a);
+    document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>';
+    document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>';
     
 	/*document.querySelector('body').innerHTML += '<div class="slideout"></div>';
     document.querySelector('.slideout').innerHTML += '<i class="fa fa-bars fa-2x"> </i>';
@@ -178,7 +182,7 @@ setTimeout(function () {
 			$('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 );
 			return false;
 		});
-	})(jQuery);
+	})(jQuery);	
 	/*$.ajax({
 		type: "GET",
 		url: "../INDEX/toc.xml",
