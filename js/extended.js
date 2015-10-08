@@ -129,16 +129,16 @@ loadjscssfile("../css/materialize.min.css", "css") //dynamically load materializ
 window.onload=function() {
     document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>';
     document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>';
-    
-	/*document.querySelector('body').innerHTML += '<div class="slideout"></div>';
-    document.querySelector('.slideout').innerHTML += '<i class="fa fa-bars fa-2x"> </i>';
-    document.querySelector('.slideout').innerHTML += '<div class="slideout_inner"></div>';*/
-	
 	document.querySelector('.mainContent').innerHTML += '<div id="toTop"><i class="fa fa-arrow-circle-up fa-4x"> </i></div>';
     document.querySelector('.footer tr:nth-child(1) td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
     document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
     document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
     document.querySelector('.footer tr:nth-child(2) td:nth-child(2) a').innerHTML += '<i class="fa fa-list-alt fa-2x"> </i>';
+	/*
+	document.querySelector('body').innerHTML += '<div class="slideout"></div>';
+    document.querySelector('.slideout').innerHTML += '<i class="fa fa-bars fa-2x"> </i>';
+    document.querySelector('.slideout').innerHTML += '<div class="slideout_inner"></div>';
+	*/
     /* in future fix btn in alert message
     document.querySelector('.warning').innerHTML += '<i class="fa fa-exclamation-triangle fa-2x"> </i>';
     document.querySelector('.notice').innerHTML += '<i class="fa fa-commenting-o fa-2x"> </i>';
@@ -159,13 +159,13 @@ setTimeout(function () {
             $('body,html').animate({scrollTop:0},800);
         });
     });
-	$('.tabs-wrapper .row').pushpin({ top: $('.tabs-wrapper').offset().top });
 	(function(){
 		$('.toc').on('click', '.tocItem', function () {
 			$('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 );
 			return false;
 		});
 	})(jQuery);
+	$("img").addClass( "materialboxed responsive-img initialized" );
 	/*$.ajax({
 		type: "GET",
 		url: "../INDEX/toc.xml",
