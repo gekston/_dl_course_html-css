@@ -5,7 +5,7 @@ var script = document.createElement('script');
 script.src = '../js/2.1.3jquery.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
 var mscript = document.createElement('script');
-script.src = '../js/materialize.min.js';
+script.src = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 function startAnnotator() {
@@ -125,15 +125,10 @@ var stars =
 loadjscssfile("../css/font-awesome.css", "css") //dynamically load font-awesome.min.css
 loadjscssfile("../css/materialize.min.css", "css") //dynamically load materialize.min.css
 
+
 // onload add div with list course
 window.onload=function() {
-    document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>';
-    document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>';
-	document.querySelector('.mainContent').innerHTML += '<div id="toTop"><i class="fa fa-arrow-circle-up fa-4x"> </i></div>';
-    document.querySelector('.footer tr:nth-child(1) td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
-    document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
-    document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
-    document.querySelector('.footer tr:nth-child(2) td:nth-child(2) a').innerHTML += '<i class="fa fa-list-alt fa-2x"> </i>';
+
 	/*
 	document.querySelector('body').innerHTML += '<div class="slideout"></div>';
     document.querySelector('.slideout').innerHTML += '<i class="fa fa-bars fa-2x"> </i>';
@@ -145,27 +140,39 @@ window.onload=function() {
     document.querySelector('.quote').innerHTML += '<i class="fa fa-search fa-2x"> </i>';
     */
 }
-
-setTimeout(function () {
-	$(function() {
-        $(window).scroll(function() {
-            if($(this).scrollTop() != 0) {
-                $('#toTop').fadeIn();
-            } else {
-                $('#toTop').fadeOut();
-            }
-        });
-        $('#toTop').click(function() {
-            $('body,html').animate({scrollTop:0},800);
-        });
-    });
-	(function(){
-		$('.toc').on('click', '.tocItem', function () {
-			$('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 );
-			return false;
+window.onload = function() {
+	if (!jQuery) {
+		alert("Ошибка! jQuery не загрузилась...");
+	} else {
+		document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>';
+		document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>';
+		document.querySelector('.mainContent').innerHTML += '<div id="toTop"><i class="fa fa-arrow-circle-up fa-4x"> </i></div>';
+		document.querySelector('.footer tr:nth-child(1) td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
+		document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
+		document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
+		document.querySelector('.footer tr:nth-child(2) td:nth-child(2) a').innerHTML += '<i class="fa fa-list-alt fa-2x"> </i>';
+		$(function() {
+			$(window).scroll(function() {
+				if($(this).scrollTop() != 0) {
+					$('#toTop').fadeIn();
+				} else {
+					$('#toTop').fadeOut();
+				}
+			});
+			$('#toTop').click(function() {
+				$('body,html').animate({scrollTop:0},800);
+			});
 		});
-	})(jQuery);
-	$("img").addClass( "materialboxed responsive-img initialized" );
+		(function(){
+			$('.toc').on('click', '.tocItem', function () {
+				$('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 );
+				return false;
+			});
+		})(jQuery);
+		$(".mainContent img").addClass( "materialboxed responsive-img initialized" );
+		$('.materialboxed').materialbox();
+    }
+}
 	/*$.ajax({
 		type: "GET",
 		url: "../INDEX/toc.xml",
@@ -177,7 +184,6 @@ setTimeout(function () {
 			$(".slideout_inner").append('<div>' + $(this).find("Title").text() + '</div>');
 		});
 	}*/
-}, 10000);
 
 /**
  * Запуск дополнительных элементов при загрузке окна
