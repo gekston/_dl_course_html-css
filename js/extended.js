@@ -122,15 +122,11 @@ var stars =
     if (typeof fileref!="undefined")
         document.getElementsByTagName("head")[0].appendChild(fileref)
 }
-loadjscssfile("../css/font-awesome.css", "css") ////dynamically load font-awesome.min.css
-loadjscssfile("../css/materialize.min.css", "css") ////dynamically load materialize.min.css
+loadjscssfile("../css/font-awesome.css", "css") //dynamically load font-awesome.min.css
+loadjscssfile("../css/materialize.min.css", "css") //dynamically load materialize.min.css
 
 // onload add div with list course
 window.onload=function() {
-	//document.querySelector("a ~ h2").innerHTML += ' <hr/>';
-	
-	//var a = $("h2 ~ a").html('</div><div class=class="mainContent">');
-	//console.log(a);
     document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>';
     document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>';
     
@@ -148,15 +144,7 @@ window.onload=function() {
     document.querySelector('.notice').innerHTML += '<i class="fa fa-commenting-o fa-2x"> </i>';
     document.querySelector('.quote').innerHTML += '<i class="fa fa-search fa-2x"> </i>';
     */
-	/*
-	calculate height html page
-	var h=document.body.clientHeight;
-	var c = h/3508;
-	console.log(h);
-	console.log(c);
-	*/
 }
-
 
 setTimeout(function () {
 	$(function() {
@@ -171,18 +159,13 @@ setTimeout(function () {
             $('body,html').animate({scrollTop:0},800);
         });
     });
+	$('.tabs-wrapper .row').pushpin({ top: $('.tabs-wrapper').offset().top });
 	(function(){
 		$('.toc').on('click', '.tocItem', function () {
 			$('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 );
 			return false;
 		});
 	})(jQuery);
-	(function(){
-		$('.keywords').on('click', 'a', function () {
-			$('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 );
-			return false;
-		});
-	})(jQuery);	
 	/*$.ajax({
 		type: "GET",
 		url: "../INDEX/toc.xml",
