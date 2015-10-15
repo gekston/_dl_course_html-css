@@ -2,10 +2,10 @@ var CKEDITOR_BASEPATH = "/javascripts/ckeditor/";
 var mainContent = null;
 
 var script = document.createElement('script');
-script.src = '../js/2.1.3jquery.min.js';
+script.src = '../js/jquery.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
 var mscript = document.createElement('script');
-script.src = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js';
+script.src = '../js/materialize.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
 
 function startAnnotator() {
@@ -147,9 +147,9 @@ window.onload = function() {
 		document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>';
 		document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>';
 		document.querySelector('.mainContent').innerHTML += '<div id="toTop"><i class="fa fa-arrow-circle-up fa-4x"> </i></div>';
-		document.querySelector('.footer tr:nth-child(1) td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
-		document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
-		document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
+		//document.querySelector('.footer tr:nth-child(1) td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
+		//document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
+        document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
 		document.querySelector('.footer tr:nth-child(2) td:nth-child(2) a').innerHTML += '<i class="fa fa-list-alt fa-2x"> </i>';
 		$(function() {
 			$(window).scroll(function() {
@@ -164,7 +164,7 @@ window.onload = function() {
 			});
 		});
 		(function(){
-			$('.toc').on('click', '.tocItem', function () {
+			$('.toc, .keywords').on('click', 'a', function () {
 				$('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 );
 				return false;
 			});
