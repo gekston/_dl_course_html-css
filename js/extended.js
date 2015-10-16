@@ -4,9 +4,10 @@ var mainContent = null;
 var script = document.createElement('script');
 script.src = '../js/jquery.min.js';
 document.getElementsByTagName('head')[0].appendChild(script);
-var mscript = document.createElement('script');
-script.src = '../js/materialize.min.js';
-document.getElementsByTagName('head')[0].appendChild(script);
+/*var mscript = document.createElement('script');
+script.src = '../js/materialize.js';
+script.src = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js';
+document.getElementsByTagName('head')[0].appendChild(script);*/
 
 function startAnnotator() {
   var m  = window.location.href.match(/textbooks\/\d+\/(\d+)/);
@@ -124,7 +125,7 @@ var stars =
 }
 loadjscssfile("../css/font-awesome.css", "css") //dynamically load font-awesome.min.css
 loadjscssfile("../css/materialize.min.css", "css") //dynamically load materialize.min.css
-
+loadjscssfile("../js/materialize.js", "js")
 
 // onload add div with list course
 window.onload=function() {
@@ -169,8 +170,11 @@ window.onload = function() {
 				return false;
 			});
 		})(jQuery);
-		$(".mainContent img").addClass( "materialboxed responsive-img initialized" );
-		$('.materialboxed').materialbox();
+		$('.mainContent img').addClass( "materialboxed responsive-img" );
+		$('.im img').materialbox();
+        $('.collapsible').collapsible({
+            accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+        });
     }
 }
 	/*$.ajax({
