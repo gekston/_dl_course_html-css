@@ -123,9 +123,10 @@ var stars =
     if (typeof fileref!="undefined")
         document.getElementsByTagName("head")[0].appendChild(fileref)
 }
+loadjscssfile("../js/materialize.js", "js")
 loadjscssfile("../css/font-awesome.css", "css") //dynamically load font-awesome.min.css
 loadjscssfile("../css/materialize.min.css", "css") //dynamically load materialize.min.css
-loadjscssfile("../js/materialize.js", "js")
+
 
 // onload add div with list course
 window.onload=function() {
@@ -145,6 +146,11 @@ window.onload = function() {
 	if (!jQuery) {
 		alert("Ошибка! jQuery не загрузилась...");
 	} else {
+        var k = document.getElementsByClassName("wrapper");
+        console.log(k);
+        for ( i = 0 ; k.length > i ; i++) {
+            $(".wrapper_top img:first-child").after("<i class='fa fa-info-circle fa-lg'> </i>")
+        }
 		document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>';
 		document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>';
 		document.querySelector('.mainContent').innerHTML += '<div id="toTop"><i class="fa fa-arrow-circle-up fa-4x"> </i></div>';
@@ -170,10 +176,11 @@ window.onload = function() {
 				return false;
 			});
 		})(jQuery);
-		$('.mainContent img').addClass( "materialboxed responsive-img" );
+		$('.im img').addClass( "materialboxed responsive-img" );
 		$('.im img').materialbox();
-        $('.collapsible').collapsible({
-            accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+        //$('.cut').data("data-collapsible") === "accordion";
+        $('.cut').collapsible({
+            accordion : false 
         });
     }
 }
