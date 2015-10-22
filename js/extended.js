@@ -1,19 +1,11 @@
 var CKEDITOR_BASEPATH = "/javascripts/ckeditor/";
 var mainContent = null;
 
-var script = document.createElement('script');
-script.src = '../js/jquery.min.js';
-document.getElementsByTagName('head')[0].appendChild(script);
-/*var mscript = document.createElement('script');
-script.src = '../js/materialize.js';
-script.src = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js';
-document.getElementsByTagName('head')[0].appendChild(script);*/
-
 function startAnnotator() {
   var m  = window.location.href.match(/textbooks\/\d+\/(\d+)/);
   if(!m) return;
   var node_id = m[1];
-  jQuery.ajax({type: "GET", dataType: "json", url: "/annotate/userinfo", 
+  jQuery.ajax({type: "GET", dataType: "json", url: "/annotate/userinfo",
       success: function(data) {
       // TODO: query for user info
       var annot = jQuery(".mainContent").annotator();
@@ -29,7 +21,7 @@ function startAnnotator() {
             'admin':  [data.id]
           },
           userId: function (user) {
-            if (user && user.id) { 
+            if (user && user.id) {
               return user.id;
             }
             return user;
@@ -54,12 +46,12 @@ function startAnnotator() {
 function add_annot_script() {
    var css=document.createElement("link")
    jQuery(function(){
-    if(jQuery(".currPath").text().match(/(хімія|химия)/i) && !jQuery(".currPath").text().match(/(Загальна та органічна хімія)/i) && 
+    if(jQuery(".currPath").text().match(/(хімія|химия)/i) && !jQuery(".currPath").text().match(/(Загальна та органічна хімія)/i) &&
        jQuery(".currPath").text() != 'Хімія'){
           jQuery(".mainContent").addClass("chemistry");
       }
 	});
-  
+
   css.setAttribute("rel", "stylesheet")
   css.setAttribute("type", "text/css")
   css.setAttribute("href", "/javascripts/annotator/annotator.min.css");
@@ -78,10 +70,10 @@ function add_annot_script_q() {
   setTimeout("if(typeof MathJax != 'undefined') MathJax.Hub.Queue(add_annot_script); else add_annot_script();", 5000);
 }
 //подключаем jQuery, jQuery.noConflict() в конце jQuery.js
-function link(){
+/*function link(){
   var script=document.createElement("script");
   script.language="JavaScript";
-  script.src="/javascripts/jquery.min.js";
+  script.src="../js/jquery.min.js";
   script.onreadystatechange= function () {
     if (this.readyState == 'complete') {
 	 add_annot_script_q();
@@ -90,7 +82,93 @@ function link(){
   script.onload = add_annot_script_q;
   document.head.appendChild(script);
 }
-link();
+link();*/
+
+// load css js
+function loadjscssfile(filename, filetype){
+  if (filetype=="js"){ //if filename is a external JavaScript file
+    var fileref=document.createElement('script')
+    fileref.setAttribute("type","text/javascript")
+    fileref.setAttribute("src", filename)
+  }
+  else if (filetype=="css"){ //if filename is an external CSS file
+    var fileref=document.createElement("link")
+    fileref.setAttribute("rel", "stylesheet")
+    fileref.setAttribute("type", "text/css")
+    fileref.setAttribute("href", filename)
+  }
+  if (typeof fileref!="undefined")
+  document.getElementsByTagName("head")[0].appendChild(fileref)
+}
+loadjscssfile("../js/jquery.min.js", "js")
+loadjscssfile("../js/materialize.min.js", "js")
+loadjscssfile("../css/font-awesome.css", "css") //dynamically load font-awesome.min.css
+loadjscssfile("../css/materialize.min.css", "css") //dynamically load materialize.min.css
+
+window.onload = function() {
+  if (jQuery) {
+    var k = document.getElementsByClassName("wrapper");
+    for ( i = 0 ; k.length > i ; i++) {
+      $(".wrapper_top img:first-child").after("<i class='fa fa-info-circle fa-lg'> </i>")
+    }
+    jQuery('.currPath ~ table tr td:nth-child(1) a').append('<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>');
+    jQuery('.currPath ~ table tr td:nth-child(3) a').append('<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>');
+    jQuery('.footer tr:nth-child(1) td:nth-child(2) a').append('<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>');
+    jQuery('.footer tr:nth-child(2) td:nth-child(2) a').append('<i class="fa fa-list-alt fa-2x"> </i>');
+    jQuery('.mainContent').append('<div id="toTop"><i class="fa fa-arrow-circle-up fa-4x"> </i></div>');
+    $(function() {
+      $(window).scroll(function() {
+        if($(this).scrollTop() != 0) {
+          $('#toTop').fadeIn();
+        } else {
+          $('#toTop').fadeOut();
+        }
+      });
+      $('#toTop').click(function() {
+        $('body,html').animate({scrollTop:0},800);
+      });
+    });
+    (function(){
+      $('.toc, .keywords').on('click', 'a', function () {
+        $('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 );
+        return false;
+      });
+		})(jQuery);
+		$('.im img').addClass( "materialboxed responsive-img" );
+		jQuery('.im img').materialbox();
+    jQuery('.cut').collapsible({
+      accordion : false
+    });
+    } else {
+      console.log('jQuery dont load')
+    }
+    //document.querySelector('.footer tr:nth-child(1) td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
+		//document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
+    /*
+    document.querySelector('table:nth-child(4) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>';
+    document.querySelector('table:nth-child(4) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>';
+    document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
+    document.querySelector('.footer tr:nth-child(2) td:nth-child(2) a').innerHTML += '<i class="fa fa-list-alt fa-2x"> </i>';
+    document.querySelector('.mainContent').innerHTML += '<div id="toTop"><i class="fa fa-arrow-circle-up fa-4x"> </i></div>';
+    var script = document.createElement('script');
+    script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js';
+    document.getElementsByTagName('head')[0].appendChild(script);
+    var mscript = document.createElement('script');
+    mscript.src = '../js/materialize.js';
+    //script.src = 'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js';
+    document.getElementsByTagName('head')[0].appendChild(script);*/
+
+    /*
+    document.querySelector('body').innerHTML += '<div class="slideout"></div>';
+    document.querySelector('.slideout').innerHTML += '<i class="fa fa-bars fa-2x"> </i>';
+    document.querySelector('.slideout').innerHTML += '<div class="slideout_inner"></div>';
+    */
+    /* in future fix btn in alert message
+    document.querySelector('.warning').innerHTML += '<i class="fa fa-exclamation-triangle fa-2x"> </i>';
+    document.querySelector('.notice').innerHTML += '<i class="fa fa-commenting-o fa-2x"> </i>';
+    document.querySelector('.quote').innerHTML += '<i class="fa fa-search fa-2x"> </i>';
+    */
+}
 
 var container="<div class='wid-container'></div>"
 var expand="<div class='tool-wrapper'><div class='toolbar-exp'></div></div>"
@@ -106,95 +184,6 @@ var stars =
     "</div>" +
     "<span id='mark1'> Кількість голосів:</span>"+
     "</div>"
-
-// load css js
-    function loadjscssfile(filename, filetype){
-    if (filetype=="js"){ //if filename is a external JavaScript file
-        var fileref=document.createElement('script')
-        fileref.setAttribute("type","text/javascript")
-        fileref.setAttribute("src", filename)
-    }
-    else if (filetype=="css"){ //if filename is an external CSS file
-        var fileref=document.createElement("link")
-        fileref.setAttribute("rel", "stylesheet")
-        fileref.setAttribute("type", "text/css")
-        fileref.setAttribute("href", filename)
-    }
-    if (typeof fileref!="undefined")
-        document.getElementsByTagName("head")[0].appendChild(fileref)
-}
-loadjscssfile("../js/materialize.js", "js")
-loadjscssfile("../css/font-awesome.css", "css") //dynamically load font-awesome.min.css
-loadjscssfile("../css/materialize.min.css", "css") //dynamically load materialize.min.css
-
-
-// onload add div with list course
-window.onload=function() {
-
-	/*
-	document.querySelector('body').innerHTML += '<div class="slideout"></div>';
-    document.querySelector('.slideout').innerHTML += '<i class="fa fa-bars fa-2x"> </i>';
-    document.querySelector('.slideout').innerHTML += '<div class="slideout_inner"></div>';
-	*/
-    /* in future fix btn in alert message
-    document.querySelector('.warning').innerHTML += '<i class="fa fa-exclamation-triangle fa-2x"> </i>';
-    document.querySelector('.notice').innerHTML += '<i class="fa fa-commenting-o fa-2x"> </i>';
-    document.querySelector('.quote').innerHTML += '<i class="fa fa-search fa-2x"> </i>';
-    */
-}
-window.onload = function() {
-	if (!jQuery) {
-		alert("Ошибка! jQuery не загрузилась...");
-	} else {
-        var k = document.getElementsByClassName("wrapper");
-        console.log(k);
-        for ( i = 0 ; k.length > i ; i++) {
-            $(".wrapper_top img:first-child").after("<i class='fa fa-info-circle fa-lg'> </i>")
-        }
-		document.querySelector('table:nth-child(5) tr td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>';
-		document.querySelector('table:nth-child(5) tr td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>';
-		document.querySelector('.mainContent').innerHTML += '<div id="toTop"><i class="fa fa-arrow-circle-up fa-4x"> </i></div>';
-		//document.querySelector('.footer tr:nth-child(1) td:nth-child(1) a').innerHTML += '<i class="fa fa-arrow-left fa-2x"> </i>';
-		//document.querySelector('.footer tr:nth-child(1) td:nth-child(3) a').innerHTML += '<i class="fa fa-arrow-right fa-2x"> </i>';
-        document.querySelector('.footer tr:nth-child(1) td:nth-child(2) a').innerHTML += '<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>';
-		document.querySelector('.footer tr:nth-child(2) td:nth-child(2) a').innerHTML += '<i class="fa fa-list-alt fa-2x"> </i>';
-		$(function() {
-			$(window).scroll(function() {
-				if($(this).scrollTop() != 0) {
-					$('#toTop').fadeIn();
-				} else {
-					$('#toTop').fadeOut();
-				}
-			});
-			$('#toTop').click(function() {
-				$('body,html').animate({scrollTop:0},800);
-			});
-		});
-		(function(){
-			$('.toc, .keywords').on('click', 'a', function () {
-				$('html, body').animate({ scrollTop:  $('a[name="'+this.hash.slice(1)+'"]').offset().top }, 1000 );
-				return false;
-			});
-		})(jQuery);
-		$('.im img').addClass( "materialboxed responsive-img" );
-		$('.im img').materialbox();
-        //$('.cut').data("data-collapsible") === "accordion";
-        $('.cut').collapsible({
-            accordion : false 
-        });
-    }
-}
-	/*$.ajax({
-		type: "GET",
-		url: "../INDEX/toc.xml",
-		dataType: "xml",
-		success: xmlParser
-	});
-	function xmlParser(xml) {
-		$(xml).find("item").each(function () {
-			$(".slideout_inner").append('<div>' + $(this).find("Title").text() + '</div>');
-		});
-	}*/
 
 /**
  * Запуск дополнительных элементов при загрузке окна
@@ -215,7 +204,7 @@ if(window.ActiveXObject) {
 /**
  * Открывает фрагмент
  */
- 
+
 
 function showAll(button){
     button = $(button.parentNode);
@@ -252,7 +241,7 @@ function Show_or_Hide_Subling(button){
   var object = button.getElementsByClassName('cut')[0];
   var top_button = button.getElementsByClassName('wrapper_top')[0];
   var bottom_button = button.getElementsByClassName('wrapper_bottom')[0];
-  if (object.style.display == 'none' || object.style.visibility == 'hidden' || object.style.overflow == 'hidden'){
+  if (object.style.display == 'none' || object.style.display == 'none' || object.style.overflow == 'hidden'){
     top_button.adjacent('img')[0].src = '../img/less.png'
     top_button.adjacent('span')[0].hide();
     top_button.adjacent('span')[1].show();
@@ -285,7 +274,7 @@ function getRandom(max,min){
  * Оборачивает блок краткого конспекта
  */
 function addCutWrapping() {
-  var cut_close_button = 
+  var cut_close_button =
     "<div class='wrapper_bottom' onClick='Show_or_Hide_Subling(this)' style='display:none'>\
       <img src='../img/direction_up.png' title='згорнути' alt='згорнути'></div>";
   var i = 0;
@@ -295,9 +284,9 @@ function addCutWrapping() {
       less = text_if_defined(obj.adjacent('span.if_show')[i].textContent, 'Згорнути');
     } else {
       more = text_if_defined(obj.adjacent('span.if_hide')[i].innerText, 'Детальніше');
-      less = text_if_defined(obj.adjacent('span.if_show')[i].innerText, 'Згорнути'); 
+      less = text_if_defined(obj.adjacent('span.if_show')[i].innerText, 'Згорнути');
     }
-    show_hide_button = 
+    show_hide_button =
       '<div class="wrapper_top" onClick="Show_or_Hide_Subling(this);">\
         <img src="../img/more.png" title="Відкрити|Сховати"></img>\
         <span>'+more+'</span><span style="display:none">'+less+'</span></div>';
@@ -321,7 +310,7 @@ function getMain(){
 /**
  * Открыть/скрыть фрагменты. Работает независимо, открыт фрагмент или закрыт
  * @param obj - div, из которого вызывается функция
- */    
+ */
 function ShowHideAll(obj){
     if (obj.attributes.src.value.match('../img/openall.png')){ // match - for IE
         $$('div.cut').each(function(objone){
@@ -355,7 +344,7 @@ function start() {
   updateUser();
   styles();
   cont();
-  addCutWrapping(); 
+  addCutWrapping();
   wrapLibraryLinks();
 
   },1000);
@@ -393,7 +382,7 @@ function cont(){
   bigStarc.attr({'title':'Оцінка'});
   jQuery(".wid-container").append(upc);
   if(getNodeId()){
-   jQuery(".wid-container").append(bigStarc)  
+   jQuery(".wid-container").append(bigStarc)
   }
   if((jQuery('.marked')==null))
       jQuery(".wid-container").append(expandc);
@@ -401,7 +390,7 @@ function cont(){
      jQuery(".wid-container").append(users);
    }
   jQuery(".wid-container").append(downc);
-  
+
   (function(jq) {
       jq.autoScroll = function(ops) {
       var t = jq('.'+ops.styleClass),
@@ -549,7 +538,7 @@ var checkU=false;
        checkU=false;
      }
    );
-   
+
      jQuery('#attendence').hover(
     function(){
        checkA=true;
@@ -670,32 +659,32 @@ var styles=function(){
        }
   );
       //обработчики событий
-  for(var i=1;i<=5;i++){
-      (function (a){
-        $$('[class=listmark'+a+']')[0].observe('mouseover',function(){
-      for(var p=0;p<a;p++){
-         $$('[class=linckm]')[p].setStyle({'backgroundImage':'url(/images/widget/mstar.png)'})
-      }
-        });
-        $$('[class=listmark'+a+']')[0].observe('mouseout',function(){
-    if(a<=totalMark)
-        $$('[class=linckm]')[(a-1)].setStyle({'backgroundImage':'url(/images/widget/orstar.png)'});
-    else
-        $$('[class=linckm]')[(a-1)].setStyle({'backgroundImage':'url(/images/widget/starin.png)'});
-    });
+    for(var i=1;i<=5;i++){
+        (function (a){
+            $$('[class=listmark'+a+']')[0].observe('mouseover',function(){
+                for(var p=0;p<a;p++){
+                    $$('[class=linckm]')[p].setStyle({'backgroundImage':'url(/images/widget/mstar.png)'})
+                }
+            });
+            $$('[class=listmark'+a+']')[0].observe('mouseout',function(){
+                if(a<=totalMark)
+                    $$('[class=linckm]')[(a-1)].setStyle({'backgroundImage':'url(/images/widget/orstar.png)'});
+                else
+                    $$('[class=linckm]')[(a-1)].setStyle({'backgroundImage':'url(/images/widget/starin.png)'});
+            });
 
-       })(i);
-    $$('[class=lmark]')[0].observe('mouseout',function(){
-        for(var i=0;i<5;i++){
-      if(i<totalMark)
-          $$('[class=linckm]')[i].setStyle({'backgroundImage':'url(/images/widget/orstar.png)'});
-      else
-          $$('[class=linckm]')[i].setStyle({'backgroundImage':'url(/images/widget/starin.png)'});
-        }
-    });
+        })(i);
+        $$('[class=lmark]')[0].observe('mouseout',function(){
+            for(var i=0;i<5;i++){
+                if(i<totalMark)
+                    $$('[class=linckm]')[i].setStyle({'backgroundImage':'url(/images/widget/orstar.png)'});
+                else
+                    $$('[class=linckm]')[i].setStyle({'backgroundImage':'url(/images/widget/starin.png)'});
+            }
+        });
     }
-    }
-    
+}
+
     function updateUser(){
        sid=Math.random()
        jQuery(".mainContent").append("<div id='attendence'></div>");
@@ -706,7 +695,7 @@ var styles=function(){
        jQuery("#head_a").css({'text-align' : 'center', 'font-size' : '80%','marginBottom' :'15px'});
        jQuery("#main_c").css({'font-size' : '80%', 'padding': '4px'});
        jQuery('#attendence').css({'opacity':'0','position' : 'absolute', 'width' : '13%','background' : 'white','top' : '330px' ,'left' :'60px', 'z-index':'-1','borderRadius':'5px','borderWidth':'1px','borderStyle':'solid','borderColor':'#c4b7b7','boxShadow':'3px 3px 3px grey'});
-       setInterval(function(){ 
+       setInterval(function(){
         new Ajax.Request('/api/textbooks/attendence',
         { method : 'post',
          parameters : {node_id : getNodeId(), pub_id : getPubId(), sid : sid},
@@ -739,7 +728,6 @@ function AddCss(css_name){
       return false;
     }
 
-
 function setupMultilangContent() {
   var lang_blocks = jQuery("div[lang=ru],div[lang=ua],div[lang=en]");
   if(lang_blocks.size() > 1) {
@@ -765,9 +753,9 @@ function setupMultilangContent() {
 function wrapLibraryLinks() {
   jQuery("a").each(function(){
     if(this.href.match(/http:\/\/lib\.sumdu\.edu\.ua\/library\/DocDownloadForm/)) {
-      this.href = "/home/roles/download_lib?doc_url="+encodeURIComponent(this.href);  
+      this.href = "/home/roles/download_lib?doc_url="+encodeURIComponent(this.href);
     }
-  });  
+  });
   jQuery("li").each(function(){
     var m = this.innerHTML.match(/(http:\/\/lib\.sumdu\.edu\.ua\/library\/DocDownloadForm\?docid=\d+)/)
     if(m) {
@@ -782,5 +770,3 @@ function wrapLibraryLinks() {
   });
 
 }
-
-
