@@ -108,12 +108,13 @@ loadjscssfile("../css/materialize.min.css", "css") //dynamically load materializ
 window.onload = function() {
   if (jQuery) {
     var k = document.getElementsByClassName("wrapper");
-    for ( i = 0 ; k.length > i ; i++) {
+    console.log(k.length);
+    for ( i = k.length-1 ; k.length > i ; i++) {
       $(".wrapper_top img:first-child").after("<i class='fa fa-info-circle fa-lg'> </i>")
+      console.log(i);
     }
     jQuery('body').append('<div class="slideout"></div>');
     jQuery('.currPath').append('<div class="modal_shadow"><div class="slideout_inner container z-depth-5" style="display:none"></div></div>');
-    //jQuery('body').append();
     jQuery('.slideout').append('<i class="fa fa-bars fa-3x"> </i>');
     jQuery('.slideout').click(function(){
       jQuery('.slideout_inner').toggle(function(){
@@ -125,15 +126,14 @@ window.onload = function() {
           jQuery(this).animate({
             opacity: 1}, "slow");
           });
-
-        jQuery('.modal_shadow , .slideout_inner').click(function(){
-          jQuery('.modal_shadow , .slideout_inner').hide(function(){
-            jQuery('.modal_shadow , .slideout_inner').animate({
+          jQuery('.modal_shadow , .slideout_inner').click(function(){
+            jQuery('.modal_shadow , .slideout_inner').hide(function(){
+              jQuery('.modal_shadow , .slideout_inner').animate({
               opacity: 1}, "fast");
+            });
           });
         });
       });
-    });
     jQuery('.currPath ~ table tr td:nth-child(1) a').append('<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>');
     jQuery('.currPath ~ table tr td:nth-child(3) a').append('<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>');
     jQuery('.footer tr:nth-child(1) td:nth-child(2) a').append('<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>');
