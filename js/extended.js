@@ -115,7 +115,13 @@ window.onload = function() {
     jQuery('.currPath ~ table tr td:nth-child(3) a').append('<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>');
     jQuery('.footer tr:nth-child(1) td:nth-child(2) a').append('<i class="fa fa-arrow-left fa-rotate-90 fa-2x"> </i>');
     jQuery('.footer tr:nth-child(2) td:nth-child(2) a').append('<i class="fa fa-list-alt fa-2x"> </i>');
-    jQuery('.mainContent').append('<div id="toTop"><i class="fa fa-arrow-circle-up fa-4x"> </i></div>');
+    jQuery('.mainContent').append('<div id="toTop"><i class="fa fa-arrow-circle-up fa-4x tooltipped" data-position="top" data-delay="50" data-tooltip="Нагору"> </i></div>');
+    leftPop = jQuery('.footer tr:nth-child(2) td:nth-child(1)').text();
+    rightPop = jQuery('.footer tr:nth-child(2) td:nth-child(3)').text();
+    //class="tooltipped" data-position="right" data-delay="50" data-tooltip="Тема 1 Вступ. Поняття мистецтва"
+    //jQuery('#toTop').addClass("tooltipped").attr("data-position","top").attr("data-delay","50").attr("data-tooltip", "leftPop");
+    jQuery('.currPath ~ table tr td:nth-child(1) a').attr("class","tooltipped").attr("data-position","right").attr("data-delay","50").attr("data-tooltip", leftPop);
+    jQuery('.currPath ~ table tr td:nth-child(3) a').attr("class","tooltipped").attr("data-position","left").attr("data-delay","50").attr("data-tooltip", rightPop);
     $(function() {
       $(window).scroll(function() {
         if($(this).scrollTop() != 0) {
@@ -138,6 +144,9 @@ window.onload = function() {
 		jQuery('.im img').materialbox();
     jQuery('.cut').collapsible({
       accordion : false
+    });
+    $(document).ready(function(){
+      $('.tooltipped').tooltip({delay: 50});
     });
     } else {
       console.log('jQuery dont load')
