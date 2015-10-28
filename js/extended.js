@@ -111,12 +111,45 @@ window.onload = function() {
     for ( i = k.length-1 ; k.length > i ; i++) {
       $(".wrapper_top img:first-child").after("<i class='fa fa-info-circle fa-lg'> </i>")
     }
-    jQuery('body').append('<div class="slideout"></div>');
-    jQuery('body').append('<div class="modal_shadow"><div class="slideout_inner container z-depth-5" style="display:none"></div></div>');
+    jQuery('body').append('<div class="slideout tooltipped" data-position="bottom" data-delay="50" data-tooltip="Зміст"></div>');
+    jQuery('body').append('<div class="modal_shadow"><div class="slideout_inner container z-depth-5" style="display:none"><ul class="collapsible" data-collapsible="accordion"></ul></div></div>');
     jQuery('.slideout').append('<i class="fa fa-bars fa-3x"> </i>');
+
     jQuery('.slideout').click(function(){
       jQuery('.modal_shadow,.slideout_inner').toggle(function(){
-        jQuery('.slideout_inner').load("../index.html");
+        jQuery('.slideout_inner .collapsible').load("../index.html .toc li", function (){
+          jQuery('.slideout_inner .collapsible .structure, .section').wrap('<div class="collapsible-header"></div>');
+          jQuery('.collapsible-header').after('<div class="collapsible-body"></div>');
+          jQuery('.introduction, .infoblock, .author, .bibliography').appendTo( jQuery('.slideout_inner .collapsible li .collapsible-body')).wrap('<p></p>');
+          jQuery('.collapsible').collapsible({
+            accordion : false
+          });
+
+          //jQuery('.slideout_inner .toc').wrap("<div class='col s12 m6 l6'><div class='card blue-grey darken-1 hoverable'><div class='card-content white-text'></div></div></div>");
+          /*var structureRoot = document.getElementsByClassName("structure root");
+          console.log(structureRoot.length);*/
+          /*$('.toc').each(function(){
+            var a = $(this);
+            if (a.text().length === 0) {
+              a.parents('.col').hide().css("position","absolute");
+            }
+          });*/
+          /*jQuery('.slideout_inner .toc').each(function(){
+            jQuery(this).find('li').each(function(){
+              //jQuery(this).find('.toc').html();
+              if (jQuery(this).html() === '' ) {
+                jQuery(this).hide();
+                console.log('hide');
+              } else {}
+            })
+          })*/
+          /*for ( i = 0 ; i < hLi.length ; i++) {
+            if (typeof hLi === 'null') {
+              jQuery('.slideout_inner .toc').hide();
+            }
+          }*/
+
+        });
         jQuery('.slideout_inner').animate({
           top: "10%",
           opacity: 1
@@ -127,13 +160,14 @@ window.onload = function() {
             opacity: 1
           }, "slow");
           });
-          jQuery('.modal_shadow , .slideout_inner').click(function(){
-            jQuery('.modal_shadow , .slideout_inner').hide(function(){
-              jQuery('.modal_shadow , .slideout_inner').animate({
-              opacity: 1}, "fast");
-            });
-          });*/
+*/
         });
+        /*jQuery('.modal_shadow').click(function(){
+          jQuery('.modal_shadow , .slideout_inner').hide(function(){
+            jQuery('.modal_shadow , .slideout_inner').animate({
+            opacity: 1}, "fast");
+          });
+        });*/
       });
     jQuery('.currPath ~ table tr td:nth-child(1) a').append('<i class="fa fa-arrow-circle-up fa-3x fa-rotate-270"> </i>');
     jQuery('.currPath ~ table tr td:nth-child(3) a').append('<i class="fa fa-arrow-circle-up fa-3x fa-rotate-90"> </i>');
